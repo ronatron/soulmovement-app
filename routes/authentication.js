@@ -30,6 +30,38 @@ router.get(
 	}
 );
 
+// router.get(
+// 	'/soundcloud',
+// 	passport.authenticate(
+// 		'soundcloud', {
+// 			scope: 'email'
+// 		}
+// 	)
+// );
+
+// router.get(
+// 	'/soundcloud/callback',
+// 	passport.authenticate(
+// 		'soundcloud', {
+// 			failureRedirect: '/auth'
+// 		}
+// 	), function(req, res) {
+// 		// if user has been authenticated, this route will fire.
+// 		res.redirect('/');
+// 	}
+// );
+
+router.get('/soundcloud',
+  passport.authenticate('soundcloud'));
+
+router.get('/soundcloud/callback', 
+  passport.authenticate('soundcloud', { failureRedirect: '/auth' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
+
+
 router.get(
 	'/logout',
 	function(req, res){

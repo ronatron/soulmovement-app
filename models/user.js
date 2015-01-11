@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 
 var userSchema = mongoose.Schema({
 	fbId: String,
+	soundcloudId: String,
 	name: String,
 	email: String
 });
