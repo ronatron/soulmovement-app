@@ -1,0 +1,51 @@
+var passport = require('passport');
+var FacebookStrategy = require('passport-facebook').Strategy;
+var User = require('../models/user');
+
+// Session serialization
+passport.serializeUser(function(user, next){
+	next(null, user._id);
+});
+passport.deserializeUser(function(userId, next){
+	User.findById(userId, function(err, user){
+		next(err, user);
+	});
+});
+
+
+// Strategies
+var fbStrategy = new FacebookStrategy({
+	clientID: '864202350304702',
+	clientSecret: 'a1a519ae0ed5c1ac0470236480075c64',
+	callbackURL: 'http://localhost:3000/auth/facebook/callback'
+}, function(accessToken, refreshToken, profile, next) {
+	User.findOne({fbId: profile.id}, function(err, user) {
+		if(user){
+			next(null, user);
+		} else {
+			// User was not found
+			var newUser = new User({
+				fbId: profile.id,
+				name: profile.displayName,
+				email: profile.emails[0].value
+			});
+			newUser.save(function(err, newUser) {
+				if(err){
+					throw err;
+				}
+				next(null, user);
+			});
+		}
+	});
+});
+
+passport.use(fbStrategy);
+
+module.exports = {
+	ensureAuthenticated: function(req, res, next){
+		if(req.isAuthenticated()){
+			return next();
+		}
+		res.redirect('/auth');
+	}
+};
