@@ -1,7 +1,19 @@
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 20px;
+  color: #333;
 }
-
-a {
-  color: #00B7FF;
+h1 {
+    font-weight: 300;
+}
+ul, ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+li {
+  margin: 0 0 20px 0;
+}
+p {
+  margin: 0 0 5px 0;
+  font-size: 13px;
 }

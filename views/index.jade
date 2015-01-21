@@ -1,6 +1,17 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome, #{user.name}
-  p: a(href="/auth/logout") Logout
+  h1 soulmovement app
+  p What up  #{user.name} you buster
+  h1
+    | Drum &amp; Bass Hotness Top 5 on Soundcloud
+    .tracks
+      script#trackTemplate(type='/template').
+        <p>
+        playback count: <%= playback_count %>
+        &middot;
+        favoritings count: <%= favoritings_count %>
+        </p>
+        <iframe src="http://w.soundcloud.com/player?url=http://api.soundcloud.com/tracks/<%= id %>" width="100%" frameborder="no">
+
+  h5: a(href="/auth/logout") Logout
