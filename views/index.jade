@@ -1,17 +1,22 @@
 extends layout
 
 block content
-  h1 soulmovement app
-  p What up  #{user.name} you buster
-  h1
-    | Drum &amp; Bass Hotness Top 5 on Soundcloud
-    .tracks
-      script#trackTemplate(type='/template').
-        <p>
-        playback count: <%= playback_count %>
-        &middot;
-        favoritings count: <%= favoritings_count %>
-        </p>
-        <iframe src="http://w.soundcloud.com/player?url=http://api.soundcloud.com/tracks/<%= id %>" width="100%" frameborder="no">
+	h1 soulmovement app
+		p What up  #{user.name} you buster
+	ul#posts
+		h5: a(href="/auth/logout") Logout
 
-  h5: a(href="/auth/logout") Logout
+script(src='http://connect.soundcloud.com/sdk.js')
+	script.
+		SC.initialize({
+		client_id: 'c0118464034c2e20de2a2e7875718321'
+		});
+		SC.get('playlists/73421925', function(playlist) {
+		for (var i = 0; i < playlist.tracks.length; i++) {
+		console.log(playlist.tracks[i].length);
+		}
+		});
+
+#putTheWidgetHere
+	script(type='text/JavaScript').
+		SC.oEmbed("http://soundcloud.com/forss/sets/soulhack", {color: "ff0066"},  document.getElementById("putTheWidgetHere"));

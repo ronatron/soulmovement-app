@@ -69,17 +69,6 @@ var scStrategy = new SoundCloudStrategy({
 
 passport.use(scStrategy);
 
-// passport.use(new SoundCloudStrategy({
-//     clientID: 'd64ca3b367b0b75aa9bb5b5167399d23',
-// 		clientSecret: 'be036ce5404e43ebe1ae644b7a0e1c7d',
-//     callbackURL: "http://127.0.0.1:3000/auth/soundcloud/callback"
-//   },
-//   function(accessToken, refreshToken, profile, done) {
-//     User.findOrCreate({ soundcloudId: profile.id }, function (err, user) {
-//       return done(err, user);
-//     });
-//   }
-// ));
 
 module.exports = {
 	ensureAuthenticated: function(req, res, next){
